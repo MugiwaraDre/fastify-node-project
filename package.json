@@ -5,28 +5,29 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test:watch": "jest --watchAll",
+    "test:watch": "jest --watchAll --detectOpenHandles --runInBand",
     "lint": "eslint **/*.js --fix --ignore-pattern node_modules/",
     "format": "prettier --write **/*.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
     "fastify": "^3.25.3",
-    "nodemon": "^2.0.15"
+    "fastify-plugin": "^3.0.0",
+    "nodemon": "^2.0.15",
+    "pg-promise": "^10.11.1"
   },
   "devDependencies": {
     "eslint": "^8.6.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.3",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.4.5",
     "pino-pretty": "^7.3.0",
     "tap": "^15.1.5"
-  },
-  "eslintIgnore": [
-    "*.test.js",
-    "*.spec.js"
-  ]
+  }
 }

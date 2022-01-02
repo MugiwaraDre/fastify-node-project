@@ -6,7 +6,8 @@
     },
     "extends": [
         "airbnb-base",
-        "prettier"
+        "prettier",
+        "plugin:jest/recommended"
     ],
     "plugins": ["prettier"],
     "parserOptions": {
