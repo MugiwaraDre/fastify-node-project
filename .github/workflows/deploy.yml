@@ -13,6 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install Fastify Dependencies
+        run: ./batect install-dep
+
       - name: Run testcase
         run: ./batect test-ci
 
