@@ -12,7 +12,7 @@ containers:
         container: /code/node_modules
     working_directory: /code
 
-    # postgres sql container
+  # postgres sql container
   db:
     image: postgres:alpine
     ports:
@@ -51,7 +51,7 @@ tasks:
       container: my-container
       command: echo 'Hello world!'
 
-  # task for  installing dep of running fastify app
+  # task for installing dep of fastify app
   install-dep:
     description: Install dependencies needed to build fastify application
     run:
