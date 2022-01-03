@@ -9,13 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    before_install:
-      - chmod +x build.sh
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Install Fastify Dependencies
+        before_install:
+          - chmod +x build.sh
         run: ./batect install-dep
 
       - name: Run testcase
