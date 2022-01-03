@@ -16,7 +16,7 @@ const build = (opts = {}) => {
   app.register(testRoute, { prefix: 'api/v1/test' });
 
   app.get('/', async (request, reply) => {
-    reply.code(200).send({ hello: 'world!' });
+    reply.code(200).send({ hello: 'world! & alex-bish-kun' });
   });
 
   return app;
