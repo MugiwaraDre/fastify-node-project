@@ -11,12 +11,12 @@ describe('temp route', () => {
     app.close();
   });
 
-  it('should return id when post route is called with valid data', async () => {
+  it('should return id when post routeis called with valid data', async () => {
     const res = await app.inject({
       method: 'POST',
-      url: 'api/v1/test',
+      url: '/api/v1/test/',
       payload: {
-        title: 'some title',
+        title: 'some test title',
       },
     });
 
@@ -24,9 +24,10 @@ describe('temp route', () => {
     expect(res.json().id).toBeDefined();
   });
 
-  it('should return id and title when get is called at url', async () => {
+  it('should return 200 for GET route', async () => {
     const res = await app.inject({
-      url: 'api/v1/test',
+      method: 'GET',
+      url: '/api/v1/test/',
     });
 
     expect(res.statusCode).toBe(200);

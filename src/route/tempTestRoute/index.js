@@ -1,23 +1,38 @@
-const route = async (fastify) => {
-  // get route
-  fastify.get('/', async (request, reply) => {
-    const allTest = await fastify.db.query('select * from test');
+const tempService = require('../../service/temp.service');
+const {
+  postRequestBody,
+  postResponse,
+  getResponseBody,
+} = require('./temp.schema');
 
-    reply.code(200).send(allTest);
-  });
+const route = async (fastify) => {
+  const { getAll, save } = tempService(fastify);
+  // get route
+  fastify.get(
+    '/',
+    { schema: { response: getResponseBody } },
+    async (request, reply) => {
+      const allTest = await getAll();
+
+      reply.code(200).send({
+        temps: allTest,
+      });
+    }
+  );
 
   // post route
-  fastify.post('/', async (request, reply) => {
-    fastify.log.info(`request with body ${request}`);
-    const { title } = request.body;
+  fastify.post(
+    '/',
+    { schema: { body: postRequestBody, resonse: postResponse } },
+    async (request, reply) => {
+      fastify.log.info(`request with body ${request}`);
+      const { title } = request.body;
 
-    const id = await fastify.db.one(
-      'INSERT INTO test(title) VALUES($1) RETURNING id',
-      [title]
-    );
+      const id = await save(title);
 
-    reply.code(201).send(id);
-  });
+      reply.code(201).send(id);
+    }
+  );
 };
 
 module.exports = route;

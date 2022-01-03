@@ -35,6 +35,11 @@ containers:
       POSTGRES_DB: db
 
 tasks:
+  start-dev-db:
+    description: start development database
+    run:
+      container: db
+
   start-test-db:
     description: start test database
     run:
@@ -52,6 +57,23 @@ tasks:
     run:
       container: build-fastify-env
       command: npm install
+
+  test-ci:
+    description: Run test case in CI mode
+    dependencies:
+      - db-test
+    run:
+      container: build-fastify-env
+      environment:
+        PORT: 8080
+        POSTGRES_URI: postgres://app:password@db-test/db
+      command: npm run test
+
+  lint:
+    description: Run lint
+    run:
+      container: build-fastify-env
+      command: npm run lint
 
   # task for running fastify app
   start-server:

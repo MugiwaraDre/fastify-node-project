@@ -1,18 +1,14 @@
 {
     "env": {
-        "browser": true,
-        "commonjs": true,
-        "es2021": true
+    "browser": true,
+    "commonjs": true,
+    "es2021": true
     },
-    "extends": [
-        "airbnb-base",
-        "prettier",
-        "plugin:jest/recommended"
-    ],
+    "extends": ["airbnb-base", "prettier", "plugin:jest/recommended"],
     "plugins": ["prettier"],
     "parserOptions": {
-        "ecmaVersion": 13
+    "ecmaVersion": 12
     },
-    "rules": {
-    }
+    "rules": {},
+    "ignorePatterns": ["node_modules/", "migrations/"]
 }
