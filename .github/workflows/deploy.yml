@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    before_install:
+      - chmod +x build.sh
 
     steps:
       - uses: actions/checkout@v2
