@@ -7,6 +7,8 @@ on:
     branches: [master]
 
 jobs:
+  before_install:
+    - chmod +x build.sh
   build:
     runs-on: ubuntu-latest
 
@@ -14,8 +16,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install Fastify Dependencies
-        before_install:
-          - chmod +x build.sh
+
         run: ./batect install-dep
 
       - name: Run testcase
