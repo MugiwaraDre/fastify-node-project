@@ -7,8 +7,8 @@
     "start": "nodemon server.js",
     "test": "CI=true jest --coverage --runInBand --detectOpenHandles",
     "test:watch": "jest --watchAll --detectOpenHandles --runInBand",
-    "lint:fix": "eslint **/*.js --fix",
-    "lint": "eslint **/*.js",
+    "lint:fix": "eslint '**/*.js' --fix",
+    "lint": "eslint '**/*.js'",
     "format": "prettier --write **/*.js"
   },
   "author": "",
