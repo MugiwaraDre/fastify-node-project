@@ -50,8 +50,8 @@ describe('User service', () => {
       id: 'uuid',
       username: 'dre middlename dev',
       email: 'email',
-      createdAt: '2022-01-04',
-      updatedAt: '2022-01-04',
+      createdAt: '04/01/2022',
+      updatedAt: '04/01/2022',
       version: '1',
     });
   });
@@ -74,8 +74,8 @@ describe('User service', () => {
       id: 'uuid',
       username: 'dre',
       email: 'email',
-      createdAt: '2022-01-04',
-      updatedAt: '2022-01-04',
+      createdAt: '04/01/2022',
+      updatedAt: '04/01/2022',
       version: '1',
     });
   });
