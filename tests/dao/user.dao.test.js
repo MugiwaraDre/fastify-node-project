@@ -11,10 +11,6 @@ describe('User Repository', () => {
     await app.ready();
   });
 
-  beforeEach(async () => {
-    await app.db.query('delete from users');
-  });
-
   it('should save user in db', async () => {
     const user = {
       firstName: 'dre',
