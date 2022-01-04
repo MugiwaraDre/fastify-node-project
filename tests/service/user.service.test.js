@@ -34,9 +34,9 @@ describe('User service', () => {
     const { getUserById } = UserService({});
     getUserByIdDao.mockReturnValueOnce({
       id: 'uuid',
-      first_name: 'peter',
+      first_name: 'dre',
       middle_name: 'middlename',
-      last_name: 'smith',
+      last_name: 'dev',
       password: 'password',
       email: 'email',
       created_at: '2022-01-04 15:54:34.627536+00',
@@ -48,7 +48,7 @@ describe('User service', () => {
 
     expect(user).toEqual({
       id: 'uuid',
-      username: 'peter middlename smith',
+      username: 'dre middlename dev',
       email: 'email',
       createdAt: '2022-01-04',
       updatedAt: '2022-01-04',
@@ -60,7 +60,7 @@ describe('User service', () => {
     const { getUserById } = UserService({});
     getUserByIdDao.mockReturnValueOnce({
       id: 'uuid',
-      first_name: 'peter',
+      first_name: 'dre',
       password: 'password',
       email: 'email',
       created_at: '2022-01-04 15:54:34.627536+00',
@@ -72,7 +72,7 @@ describe('User service', () => {
 
     expect(user).toEqual({
       id: 'uuid',
-      username: 'peter',
+      username: 'dre',
       email: 'email',
       createdAt: '2022-01-04',
       updatedAt: '2022-01-04',

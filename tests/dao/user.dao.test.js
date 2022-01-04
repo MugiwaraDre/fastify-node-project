@@ -11,6 +11,10 @@ describe('User Repository', () => {
     await app.ready();
   });
 
+  beforeEach(async () => {
+    await app.db.query('delete from users');
+  });
+
   it('should save user in db', async () => {
     const user = {
       firstName: 'dre',
@@ -28,8 +32,8 @@ describe('User Repository', () => {
 
   it('should throw error when required field is not present', async () => {
     const user = {
-      firstName: 'peter',
-      lastName: 'smith',
+      firstName: 'dre',
+      lastName: 'dev',
     };
 
     const { saveUser } = userRepository(app.db);
