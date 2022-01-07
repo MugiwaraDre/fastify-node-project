@@ -13,6 +13,7 @@ describe('User Repository', () => {
 
   beforeEach(async () => {
     await app.db.query('delete from users');
+    await app.db.query('delete from jobs');
   });
 
   it('should save user in db', async () => {
