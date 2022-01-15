@@ -2,6 +2,7 @@ const moment = require('moment');
 const JobService = require('../../service/job.service');
 const { postRequestBody, queryParameter } = require('./job.schema');
 
+// mark this function as async - required
 const jobRoute = async (fastify) => {
   const { createJob, getJobs } = JobService(fastify);
 
@@ -25,9 +26,7 @@ const jobRoute = async (fastify) => {
         const todayDate = moment().format('YYYY-MM-DD');
 
         if (expiredAt <= todayDate) {
-          reply
-            .code(400)
-            .send({ message: 'Expired date must be set to a future date' });
+          reply.code(400).send({ message: 'expired date must be future date' });
         }
 
         done();
