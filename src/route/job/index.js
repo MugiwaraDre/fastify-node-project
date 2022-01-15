@@ -1,5 +1,5 @@
-const JobService = require('../../service/job.service');
 const moment = require('moment');
+const JobService = require('../../service/job.service');
 const { postRequestBody, queryParameter } = require('./job.schema');
 
 const jobRoute = async (fastify) => {
