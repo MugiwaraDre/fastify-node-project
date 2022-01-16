@@ -62,10 +62,34 @@ describe('User Repository', () => {
     expect(dbuser.first_name).toEqual('dre');
   });
 
+  it('should return user  when email exist in db', async () => {
+    const user = {
+      firstName: 'dre',
+      lastName: 'dev',
+      password: 'password',
+      email: 'email@gmail.com',
+    };
+
+    const { saveUser, getUserByEmailId } = userRepository(app.db);
+
+    await saveUser(user);
+
+    const dbuser = await getUserByEmailId('email@gmail.com');
+
+    expect(dbuser.first_name).toEqual('dre');
+  });
+
   it('should thorw exception when user doesnt exist', async () => {
     const { getUserById } = userRepository(app.db);
     await expect(
       getUserById('b2552277-6967-4049-b27e-c758014ea1ff')
     ).rejects.toThrow('b2552277-6967-4049-b27e-c758014ea1ff doesnt exist');
+  });
+
+  it('should throw exception when email does not exist', async () => {
+    const { getUserByEmailId } = userRepository(app.db);
+    await expect(getUserByEmailId('invalid email')).rejects.toThrow(
+      'invalid email does not exist!'
+    );
   });
 });

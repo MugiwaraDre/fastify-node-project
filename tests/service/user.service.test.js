@@ -3,6 +3,7 @@ const UserRepository = require('../../src/dao/user.dao');
 
 const getUserByIdDao = jest.fn();
 const saveUser = jest.fn();
+const getUserByEmailIdDao = jest.fn();
 
 jest.mock('../../src/dao/user.dao');
 
@@ -11,6 +12,7 @@ describe('User service', () => {
     UserRepository.mockImplementation(() => ({
       getUserById: getUserByIdDao,
       saveUser,
+      getUserByEmailId: getUserByEmailIdDao,
     }));
   });
 
@@ -74,6 +76,30 @@ describe('User service', () => {
       id: 'uuid',
       username: 'dre',
       email: 'email',
+      createdAt: '04/01/2022',
+      updatedAt: '04/01/2022',
+      version: '1',
+    });
+  });
+
+  it('should return user when password valid', async () => {
+    const { getUserByEmailId } = UserService({});
+    getUserByEmailIdDao.mockReturnValueOnce({
+      id: 'uuid',
+      first_name: 'dre',
+      password: 'password',
+      email: 'email@gmail.com',
+      created_at: '2022-01-04 15:54:34.627536+00',
+      updated_at: '2022-01-04 15:54:34.627536+00',
+      version: '1',
+    });
+
+    const user = await getUserByEmailId('email@gmail.com', 'password');
+
+    expect(user).toEqual({
+      id: 'uuid',
+      username: 'dre',
+      email: 'email@gmail.com',
       createdAt: '04/01/2022',
       updatedAt: '04/01/2022',
       version: '1',

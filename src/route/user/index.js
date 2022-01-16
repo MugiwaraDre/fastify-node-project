@@ -7,7 +7,7 @@ const {
 } = require('./user.schema');
 
 const userRoute = async (fastify) => {
-  const { getUserById, createUser } = UserService(fastify);
+  const { getUserById, createUser, getUserByEmailId } = UserService(fastify);
   fastify.get(
     '/:userId',
     { schema: { params: getRequestParams, response: getResponseBody } },
@@ -21,6 +21,20 @@ const userRoute = async (fastify) => {
       }
     }
   );
+
+  fastify.post('/login', async (request, reply) => {
+    try {
+      const { email, password } = request.body;
+
+      const user = await getUserByEmailId(email, password);
+      const token = fastify.jwt.sign(user);
+      reply.code(200).send({ token: `Bearer ${token}` });
+    } catch (error) {
+      reply.code(401).send({
+        message: error.message,
+      });
+    }
+  });
 
   fastify.post(
     '/',

@@ -3,6 +3,7 @@ const moment = require('moment');
 
 const jobRoute = require('../../src/route/job');
 const JobService = require('../../src/service/job.service');
+const authenticate = require('../../src/plugin/authenticate');
 
 jest.mock('../../src/service/job.service');
 
@@ -19,6 +20,7 @@ let app;
 describe('job route', () => {
   beforeAll(async () => {
     app = Fastify();
+    app.register(authenticate);
     app.register(jobRoute, { prefix: 'api/v1/jobs' });
 
     await app.ready();
@@ -28,9 +30,14 @@ describe('job route', () => {
     createJob.mockImplementation(() => 'uuid');
     const futureDate = moment().add(4, 'day').format('YYYY-MM-DD');
 
+    const token = app.jwt.sign({ foo: 'bar' });
+
     const res = await app.inject({
       method: 'POST',
       url: 'api/v1/jobs',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       payload: {
         title: 'title',
         description: 'description of job',
@@ -108,10 +115,13 @@ describe('job route', () => {
 
   it('should return 200 when limit and offset is present', async () => {
     getJobs.mockImplementation(() => [{ title: 'title' }]);
-
+    const token = app.jwt.sign({ foo: 'bar' });
     const res = await app.inject({
       method: 'GET',
       url: 'api/v1/jobs?limit=1&offset=0',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     expect(res.statusCode).toEqual(200);
